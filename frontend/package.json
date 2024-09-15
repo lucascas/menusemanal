@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "index.js",
     "dependencies": {
-        "@craco/craco": "^7.1.0",
+        "@craco/craco": "^7.0.0",
         "autoprefixer": "^10.4.20",
         "postcss": "^8.4.47",
         "process": "^0.11.10",
