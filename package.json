@@ -16,16 +16,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "cd frontend && npm run build",
-    "test": "react-scripts test",
+    "start": "cd frontend && npm start", 
+    "build": "cd frontend && npm run build", 
+    "test": "cd frontend && npm run test",  
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
