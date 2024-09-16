@@ -13,17 +13,25 @@ router.get('/menus', async (req, res) => {
   }
 });
 
+
 // Guardar un nuevo menú
-router.post('/menu', async (req, res) => {
+router.post('/menus', async (req, res) => {
+  const { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday } = req.body;
+
+  if (!Monday || !Tuesday || !Wednesday || !Thursday || !Friday || !Saturday || !Sunday) {
+    return res.status(400).json({ message: 'Todos los días de la semana son obligatorios' });
+  }
+
   try {
     const newMenu = new Menu(req.body);
     await newMenu.save();
-    res.json(newMenu); // Responder con el menú guardado
+    res.json(newMenu);
   } catch (error) {
-    console.error('Error al guardar el menú:', error); // Esto imprimirá el error en la consola del servidor
+    console.error('Error al guardar el menú:', error);
     res.status(500).json({ message: 'Error al guardar el menú' });
   }
 });
+
 
 
 module.exports = router;

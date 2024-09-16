@@ -21,7 +21,7 @@ function App() {
 
   // Enviar los datos del menú al backend para guardarlos
   const handleSubmit = () => {
-    fetch('http://localhost:5000/api/menu', {
+    fetch('http://localhost:5000/api/menus', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
