@@ -1,70 +1,160 @@
-# Getting Started with Create React App
+Menu Semanal - Backend y Frontend
+Este proyecto consiste en una aplicación que permite crear, almacenar y consultar menús semanales. El frontend está desarrollado en React, mientras que el backend está desarrollado con Node.js, Express y MongoDB utilizando Mongoose para la interacción con la base de datos.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Características
+Crear y almacenar menús semanales.
+Consultar menús guardados.
+Conexión a una base de datos MongoDB (usando MongoDB Atlas).
+Frontend desarrollado con React.
+Backend desarrollado con Express y Mongoose.
+Requisitos previos
+Antes de comenzar, asegúrate de tener lo siguiente instalado:
 
-## Available Scripts
+Node.js (versión 12 o superior)
+MongoDB Atlas o una instancia local de MongoDB
+Git
+Configuración del Proyecto
+Clonar el repositorio
+Clona el repositorio en tu máquina local:
 
-In the project directory, you can run:
+bash
+Copiar código
+git clone https://github.com/tu-usuario/tu-repositorio.git
+cd tu-repositorio
+Instalar las dependencias
+Este proyecto tiene tanto un frontend como un backend, por lo que necesitarás instalar las dependencias en ambas carpetas.
 
-### `npm start`
+Backend
+Ve a la carpeta del backend:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+bash
+Copiar código
+cd backend
+Instala las dependencias:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+bash
+Copiar código
+npm install
+Frontend
+Ve a la carpeta del frontend:
 
-### `npm test`
+bash
+Copiar código
+cd ../frontend
+Instala las dependencias:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+bash
+Copiar código
+npm install
+Configuración de MongoDB
+Este proyecto utiliza MongoDB Atlas para almacenar los menús. Debes crear una base de datos en MongoDB Atlas y configurar las variables de entorno.
 
-### `npm run build`
+Crea una cuenta en MongoDB Atlas y configura un cluster.
+En tu cluster, crea una base de datos llamada menudb con una colección llamada menus.
+Obtén tu URI de conexión y configúralo en un archivo .env.
+Archivo .env
+En la carpeta backend, crea un archivo .env con la siguiente estructura:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+bash
+Copiar código
+MONGO_URI=mongodb+srv://<usuario>:<contraseña>@cluster.mongodb.net/menudb?retryWrites=true&w=majority
+PORT=5000
+Reemplaza <usuario>, <contraseña>, y <cluster.mongodb.net> con tus credenciales de MongoDB Atlas.
+Ejecutar la Aplicación
+Backend
+Ve a la carpeta del backend:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+bash
+Copiar código
+cd backend
+Inicia el servidor:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+bash
+Copiar código
+npm start
+El servidor estará corriendo en http://localhost:5000.
 
-### `npm run eject`
+Frontend
+Ve a la carpeta del frontend:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+bash
+Copiar código
+cd ../frontend
+Inicia el servidor de desarrollo de React:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+bash
+Copiar código
+npm start
+El frontend estará disponible en http://localhost:3000.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Estructura del Proyecto
+El proyecto está dividido en dos carpetas principales:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Backend (/backend): Aquí se encuentra la API de Node.js con Express y Mongoose para gestionar los menús y conectar con MongoDB.
 
-## Learn More
+Rutas: Las rutas están definidas en routes/menuRoutes.js.
+Modelo: El modelo de Mongoose está en models/Menu.js.
+Configuración: La conexión a MongoDB está configurada en server.js.
+Frontend (/frontend): Este es el cliente de React donde los usuarios pueden crear y consultar menús.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+App.js: Contiene la lógica para enviar y recibir menús del backend.
+Componentes: Puedes agregar componentes adicionales para mejorar la interfaz.
+API Endpoints
+El backend expone las siguientes rutas:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+GET /api/menus: Obtener todos los menús.
+POST /api/menus: Crear un nuevo menú. El cuerpo de la solicitud debe ser un objeto JSON con los campos:
+json
+Copiar código
+{
+  "Monday": "Pizza",
+  "Tuesday": "Tacos",
+  "Wednesday": "Pasta",
+  "Thursday": "Ensalada",
+  "Friday": "Sushi",
+  "Saturday": "Hamburguesa",
+  "Sunday": "Pollo"
+}
+Despliegue
+Despliegue en Vercel (Frontend)
+Crea una cuenta en Vercel.
+Conecta tu repositorio a Vercel y selecciona la carpeta frontend como el directorio raíz para desplegar el frontend.
+Despliega el proyecto.
+Despliegue del Backend (Heroku o cualquier otro servicio)
+Crea una cuenta en Heroku (u otro proveedor de hosting).
+Conecta tu repositorio y configura las variables de entorno en el panel de Heroku (MONGO_URI, PORT).
+Despliega el backend.
+Consideraciones de Seguridad
+Variables de entorno: Nunca subas el archivo .env a tu repositorio. Asegúrate de agregarlo a tu .gitignore para evitar exponer credenciales sensibles.
 
-### Code Splitting
+Agrega esto a tu archivo .gitignore:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+bash
+Copiar código
+/backend/.env
+Tecnologías Utilizadas
+Frontend: React
+Backend: Node.js, Express
+Base de Datos: MongoDB Atlas
+ORM: Mongoose
+CORS: Para permitir solicitudes entre el frontend (puerto 3000) y el backend (puerto 5000)
+Problemas Comunes
+Error de CORS: Si el frontend y backend están en puertos diferentes, asegúrate de que CORS esté habilitado en el backend.
 
-### Analyzing the Bundle Size
+javascript
+Copiar código
+const cors = require('cors');
+app.use(cors());
+Error de conexión a MongoDB: Verifica que la URI de conexión a MongoDB Atlas esté correctamente configurada en el archivo .env.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Contribuir
+Si quieres contribuir a este proyecto, crea un pull request o abre un issue en el repositorio.
 
-### Making a Progressive Web App
+Licencia
+Este proyecto está licenciado bajo la MIT License.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Autor
+Nombre del Autor: [Tu nombre]
+Email: [Tu correo]
+GitHub: [Tu GitHub]
+Este README proporciona una guía completa para la instalación, configuración, y despliegue del proyecto, asegurando que cualquiera que clone el repositorio pueda configurarlo y ejecutarlo sin problemas.
