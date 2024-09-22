@@ -6,15 +6,14 @@ const router = express.Router();
 // Obtener todos los menús
 router.get('/menus', async (req, res) => {
   try {
-    const menus = await Menu.find();  // Obtener todos los menús guardados en la base de datos
+    const menus = await Menu.find();  // Obtener todos los menús guardados
     res.json(menus);
   } catch (error) {
     res.status(500).json({ message: 'Error al obtener los menús' });
   }
 });
 
-
-// Guardar un nuevo menú
+// Guardar un nuevo menú con almuerzo y cena por día
 router.post('/menus', async (req, res) => {
   const { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday } = req.body;
 
@@ -31,7 +30,5 @@ router.post('/menus', async (req, res) => {
     res.status(500).json({ message: 'Error al guardar el menú' });
   }
 });
-
-
 
 module.exports = router;

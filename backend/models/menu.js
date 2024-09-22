@@ -1,14 +1,35 @@
 const mongoose = require('mongoose');
 
-// Definir el esquema para el menú semanal
+// Definir el esquema para el menú semanal con almuerzo y cena por día
 const menuSchema = new mongoose.Schema({
-  Monday: { type: String, required: true },    // Se espera una cadena de texto para cada día
-  Tuesday: { type: String, required: true },
-  Wednesday: { type: String, required: true },
-  Thursday: { type: String, required: true },
-  Friday: { type: String, required: true },
-  Saturday: { type: String, required: true },
-  Sunday: { type: String, required: true }
+  Monday: {
+    lunch: String,
+    dinner: String,
+  },
+  Tuesday: {
+    lunch: String,
+    dinner: String,
+  },
+  Wednesday: {
+    lunch: String,
+    dinner: String,
+  },
+  Thursday: {
+    lunch: String,
+    dinner: String,
+  },
+  Friday: {
+    lunch: String,
+    dinner: String,
+  },
+  Saturday: {
+    lunch: String,
+    dinner: String,
+  },
+  Sunday: {
+    lunch: String,
+    dinner: String,
+  }
 });
 
 // Exportar el modelo basado en el esquema

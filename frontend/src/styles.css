@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 iframe {
     display: none !important;
-  }
-  
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-image: url('https://images.unsplash.com/photo-1543352634-99a5d50ae78e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
@@ -13,7 +13,7 @@ body {
     min-height: 100vh;
 }
 
-.contenedor.encabezado{
+.contenedor.encabezado {
     flex-grow: 1;
     margin: 0 auto;
     position: relative;
@@ -23,9 +23,10 @@ body {
     box-shadow: 0 4px 6px rgba(10, 10, 10, 0.1);
 }
 
-.contenedor.encabezado .title{
+.contenedor.encabezado .title {
     margin: 30px 0px 0px 0;
 }
+
 .container {
     padding: 2rem;
     margin-bottom: 2rem;
@@ -48,6 +49,7 @@ body {
     height: 32px;
 }
 
+/* Estilo para las tarjetas de los días */
 .day-card {
     background-color: white;
     padding: 1.5rem;
@@ -62,8 +64,42 @@ body {
     box-shadow: 0 6px 8px rgba(10, 10, 10, 0.15);
 }
 
-.day-card .field.has-addons p.control.is-expanded .input, .textarea, .button {
-    border-radius: 10px;
+/* Estilo para los inputs y textarea */
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Mejora de los inputs en pantallas móviles */
+@media (max-width: 768px) {
+    input, textarea {
+        padding: 16px;
+        font-size: 18px; /* Hacer el texto más grande en pantallas pequeñas */
+    }
+
+    .day-card {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    h3 {
+        font-size: 24px; /* Ajustar el tamaño del título en móvil */
+    }
 }
 
 .button.is-primary {
@@ -112,9 +148,9 @@ body {
 }
 
 .category-item {
-    width: 80px;       /* Ancho fijo de 80px */
-    height: 80px;      /* Altura fija de 80px */
-    flex: 0 0 80px;    /* Asegura que la caja no se redimensione */
+    width: 80px;
+    height: 80px;
+    flex: 0 0 80px;
     margin-right: 10px;
     border-radius: 10px;
     display: flex !important;
@@ -129,8 +165,8 @@ body {
 }
 
 .category-button {
-    width: 80px;       /* Ocupa todo el espacio del contenedor */
-    height: 80px;      /* Ocupa todo el espacio del contenedor */
+    width: 80px;
+    height: 80px;
     border: none;
     background: none;
     display: flex;
@@ -147,14 +183,13 @@ body {
 .modal-content {
     background-color: white;
     border-radius: 15px;
-    /*padding: 2rem;*/
 }
 
 .modal-content .box {
     box-shadow: none;
 }
 
-#popupComidasList .checkbox input, .radio input{
+#popupComidasList .checkbox input, .radio input {
     float: left;
     margin-top: 7px;
     vertical-align: text-top;
@@ -252,7 +287,6 @@ body {
     margin-bottom: 1rem;
 }
 
-/* Estilo para los botones de edición */
 .button.is-small.is-info.edit-meal {
     background: none;
     border: none;
@@ -265,11 +299,10 @@ body {
 }
 
 .button.is-small.is-info.edit-meal .edit-icon {
-    width: 30px; /* Ajustar el tamaño del icono según sea necesario */
+    width: 30px;
     height: 30px;
 }
 
-/* Asegúrate de que el contenedor de los inputs y botones esté alineado */
 .field.has-addons {
     display: flex;
     align-items: center;
@@ -311,10 +344,9 @@ body {
 }
 
 .popup-title {
-    font-size: 1rem; /* Cambiar tamaño de tipografía a 1rem */
+    font-size: 1rem;
 }
 
-/* Asegurar que solo se muestre el contenido relevante */
 #step1 {
     display: block;
 }
@@ -323,7 +355,6 @@ body {
     display: none;
 }
 
-/* Para mostrar u ocultar los pasos de forma correcta */
 .is-active #step1 {
     display: block;
 }
@@ -331,8 +362,19 @@ body {
 .is-active #step2 {
     display: none;
 }
+
 .ingredients {
     font-size: 0.9rem;
     color: #555;
     margin-top: 0.5rem;
+}
+
+.button-custom {
+    border-radius: 30px;
+    background: #73aba2;
+    width: 100%;
+    padding: 20px;
+    border: 0px;
+    color: white;
+    text-transform: uppercase;
 }
