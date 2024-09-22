@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Ignorar la carpeta de autenticación de whatsapp-web.js
+backend/.wwebjs_auth
