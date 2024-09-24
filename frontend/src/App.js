@@ -21,7 +21,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/comidas')
+    fetch('/api/comidas')
       .then((res) => res.json())
       .then((data) => setComidas(data)); // Cargar todas las comidas
   }, []);
