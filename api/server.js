@@ -2,7 +2,7 @@ require('dotenv').config(); // Asegúrate de que esté en la parte superior para
 const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
-const menuRoutes = require('./routes/menuRoutes'); // Ruta de los menús
+const menuRoutes = require('./menuRoutes'); // Ruta de los menús
 const { Client, LocalAuth } = require('whatsapp-web.js'); // Importar whatsapp-web.js
 const qrcode = require('qrcode-terminal'); // Importar QR para autenticación
 

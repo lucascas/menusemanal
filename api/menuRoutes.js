@@ -1,7 +1,7 @@
 const express = require('express');
-const Menu = require('../models/Menu');
+const Menu = require('../Menu');
 const router = express.Router();
-const Comida = require('../models/Comida');  // Modelo Comida (si usas Mongoose o similar)
+const Comida = require('../Comida');  // Modelo Comida (si usas Mongoose o similar)
 
 // Obtener todos los menús
 router.get('/menus', async (req, res) => {
