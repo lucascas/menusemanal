@@ -58,7 +58,7 @@ function App() {
   };
 
   const handleSubmit = () => {
-    fetch('http://localhost:5000/api/menus', {
+    fetch('/api/menus', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

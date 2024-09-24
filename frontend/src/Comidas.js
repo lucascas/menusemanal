@@ -24,7 +24,7 @@ function Comidas() {
     e.preventDefault();
 
     try {
-      const response = await fetch('/backend/comidas', {
+      const response = await fetch('/api/comidas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ function Comidas() {
 
     const fetchComidas = async () => {
       try {
-        const response = await fetch('/backend/comidas');
+        const response = await fetch('/api/comidas');
         const data = await response.json();
         if (isMounted) {
           setComidas(data);
