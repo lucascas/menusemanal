@@ -50,6 +50,13 @@ function App() {
     }));
   };
 
+  const handleIngredientsChange = (e) => {
+    setMenu((prevMenu) => ({
+      ...prevMenu,
+      ingredients: e.target.value,
+    }));
+  };
+
   const handleSubmit = () => {
     fetch('http://localhost:5000/api/menus', {
       method: 'POST',
