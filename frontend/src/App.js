@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
-import emailjs from 'emailjs-com';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Menus from './Menus';  // Importar el nuevo componente
+import Comidas from './Comidas';  // Importa el archivo correctamente
 
 function App() {
   const [menu, setMenu] = useState({
@@ -14,11 +16,22 @@ function App() {
     ingredients: ''
   });
 
+  const [comidas, setComidas] = useState([]);
   const [savedMenus, setSavedMenus] = useState([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Manejar cambios en los inputs de cada día
+  useEffect(() => {
+    fetch('http://localhost:5000/api/comidas')
+      .then((res) => res.json())
+      .then((data) => setComidas(data)); // Cargar todas las comidas
+  }, []);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const handleChange = (day, mealType, value) => {
-    setMenu(prevMenu => ({
+    setMenu((prevMenu) => ({
       ...prevMenu,
       [day]: {
         ...prevMenu[day],
@@ -27,45 +40,16 @@ function App() {
     }));
   };
 
-  // Manejar cambios en el campo de ingredientes
-  const handleIngredientsChange = (e) => {
-    setMenu(prevMenu => ({
+  const addRecommendationToMeal = (day, mealType, comida) => {
+    setMenu((prevMenu) => ({
       ...prevMenu,
-      ingredients: e.target.value
+      [day]: {
+        ...prevMenu[day],
+        [mealType]: comida.nombre  // Agregar el nombre de la comida al campo de Almuerzo o Cena
+      }
     }));
   };
 
-  // Enviar correo con EmailJS
-  const sendEmail = (menuData) => {
-    const templateParams = {
-      to_email: 'lucas.castillo@gmail.com', // Dirección de correo válida
-      to_name: 'Lucas Castillo',
-      MondayLunch: menuData.Monday.lunch,
-      MondayDinner: menuData.Monday.dinner,
-      TuesdayLunch: menuData.Tuesday.lunch,
-      TuesdayDinner: menuData.Tuesday.dinner,
-      WednesdayLunch: menuData.Wednesday.lunch,
-      WednesdayDinner: menuData.Wednesday.dinner,
-      ThursdayLunch: menuData.Thursday.lunch,
-      ThursdayDinner: menuData.Thursday.dinner,
-      FridayLunch: menuData.Friday.lunch,
-      FridayDinner: menuData.Friday.dinner,
-      SaturdayLunch: menuData.Saturday.lunch,
-      SaturdayDinner: menuData.Saturday.dinner,
-      SundayLunch: menuData.Sunday.lunch,
-      SundayDinner: menuData.Sunday.dinner,
-      ingredients: menuData.ingredients
-    };
-
-    emailjs.send('service_0isjz8r', 'template_oe1o3vo', templateParams, 'su7bu8tVLFRR-ssfd')
-      .then((response) => {
-        console.log('Correo enviado exitosamente:', response.status, response.text);
-      }, (error) => {
-        console.error('Error al enviar el correo:', error);
-      });
-  };
-
-  // Enviar los datos del menú al backend para guardarlos
   const handleSubmit = () => {
     fetch('http://localhost:5000/api/menus', {
       method: 'POST',
@@ -74,100 +58,117 @@ function App() {
       },
       body: JSON.stringify(menu),
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Menú guardado exitosamente:', data);
-      setSavedMenus([...savedMenus, data]);
-
-      // Llamar a la función para enviar el correo con EmailJS
-      sendEmail(menu);
-
-      // Reiniciar el formulario
-      setMenu({
-        Monday: { lunch: '', dinner: '' },
-        Tuesday: { lunch: '', dinner: '' },
-        Wednesday: { lunch: '', dinner: '' },
-        Thursday: { lunch: '', dinner: '' },
-        Friday: { lunch: '', dinner: '' },
-        Saturday: { lunch: '', dinner: '' },
-        Sunday: { lunch: '', dinner: '' },
-        ingredients: ''
+      .then((response) => response.json())
+      .then((data) => {
+        setSavedMenus([...savedMenus, data]);
+        setMenu({
+          Monday: { lunch: '', dinner: '' },
+          Tuesday: { lunch: '', dinner: '' },
+          Wednesday: { lunch: '', dinner: '' },
+          Thursday: { lunch: '', dinner: '' },
+          Friday: { lunch: '', dinner: '' },
+          Saturday: { lunch: '', dinner: '' },
+          Sunday: { lunch: '', dinner: '' },
+          ingredients: ''
+        });
+      })
+      .catch((error) => {
+        console.error('Error al guardar el menú:', error);
       });
-    })
-    .catch(error => {
-      console.error('Error al guardar el menú:', error);
-    });
   };
 
-  // Obtener menús guardados del backend
-  useEffect(() => {
-    fetch('http://localhost:5000/api/menus')
-      .then(res => res.json())
-      .then(data => setSavedMenus(data));
-  }, []);
-
   return (
-    <div className="container">
-      <h1 className="title">Menú Semanal</h1>
-
-      <div className="weekdays">
-        {Object.keys(menu).slice(0, 7).map(day => (
-          <div className="day-card" key={day}>
-            <h3>{day}</h3>
-            <div>
-              <label>Almuerzo</label>
-              <input
-                type="text"
-                placeholder="Almuerzo"
-                value={menu[day].lunch}
-                onChange={(e) => handleChange(day, 'lunch', e.target.value)}
-              />
-            </div>
-            <div style={{ marginTop: '10px' }}>
-              <label>Cena</label>
-              <input
-                type="text"
-                placeholder="Cena"
-                value={menu[day].dinner}
-                onChange={(e) => handleChange(day, 'dinner', e.target.value)}
-              />
-            </div>
+    <Router>
+      <div className="container">
+        <header className="header">
+          <div className="hamburger-menu" onClick={toggleMenu}>
+            &#9776;
           </div>
-        ))}
-      </div>
+          <h1 className="title">Menú Semanal</h1>
+        </header>
 
-      {/* Campo adicional para Ingredientes */}
-      <div className="ingredients-section">
-        <h3>Ingredientes</h3>
-        <textarea
-          placeholder="Escribe los ingredientes aquí..."
-          value={menu.ingredients}
-          onChange={handleIngredientsChange}
-          rows="4"
-          cols="50"
-        />
-      </div>
+        <div className={`sidebar ${isMenuOpen ? 'open' : ''}`}>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/" onClick={toggleMenu}>Home</Link>
+              </li>
+              <li>
+                <Link to="/menus" onClick={toggleMenu}>Menúes</Link>
+              </li>
+              <li>
+                <Link to="/comidas" onClick={toggleMenu}>Comidas</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
 
-      <button className="button button-custom" onClick={handleSubmit}>
-        Guardar Menú
-      </button>
-
-      <h2>Menús Guardados</h2>
-      <ul>
-        {savedMenus.map((menu, index) => (
-          <li key={index}>
-            {Object.keys(menu).slice(0, 7).map(day => (
-              <div key={day}>
-                <strong>{day}:</strong> Almuerzo: {menu[day].lunch}, Cena: {menu[day].dinner}
-              </div>
-            ))}
+        <Routes>
+          <Route path="/" element={
             <div>
-              <strong>Ingredientes:</strong> {menu.ingredients}
+              <div className="weekdays">
+                {Object.keys(menu).slice(0, 7).map(day => (
+                  <div className="day-card" key={day}>
+                    <h3>{day}</h3>
+                    <div>
+                      <label>Almuerzo</label>
+                      <input
+                        type="text"
+                        placeholder="Almuerzo"
+                        value={menu[day].lunch}
+                        onChange={(e) => handleChange(day, 'lunch', e.target.value)}
+                      />
+                      {/* Recomendaciones de comida para el almuerzo */}
+                      <div className="recommendations">
+                        {comidas.filter(c => c.momento === 'Almuerzo').map(comida => (
+                          <div key={comida._id} className="pill" onClick={() => addRecommendationToMeal(day, 'lunch', comida)}>
+                            {comida.nombre} <span className="add-icon">+</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div style={{ marginTop: '10px' }}>
+                      <label>Cena</label>
+                      <input
+                        type="text"
+                        placeholder="Cena"
+                        value={menu[day].dinner}
+                        onChange={(e) => handleChange(day, 'dinner', e.target.value)}
+                      />
+                      {/* Recomendaciones de comida para la cena */}
+                      <div className="recommendations">
+                        {comidas.filter(c => c.momento === 'Cena').map(comida => (
+                          <div key={comida._id} className="pill" onClick={() => addRecommendationToMeal(day, 'dinner', comida)}>
+                            {comida.nombre} <span className="add-icon">+</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="ingredients-section">
+                <h3>Ingredientes</h3>
+                <textarea
+                  placeholder="Escribe los ingredientes aquí..."
+                  value={menu.ingredients}
+                  onChange={(e) => handleIngredientsChange(e)}
+                  rows="4"
+                  cols="50"
+                />
+              </div>
+
+              <button className="button button-custom" onClick={handleSubmit}>
+                Guardar Menú
+              </button>
             </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+          } />
+          <Route path="/menus" element={<Menus />} />
+          <Route path="/comidas" element={<Comidas />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

@@ -378,3 +378,260 @@ textarea {
     color: white;
     text-transform: uppercase;
 }
+
+/* styles.css */
+.hamburger-menu {
+    font-size: 30px;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    transition: 0.3s;
+    padding-top: 60px;
+  }
+  
+  .sidebar.open {
+    left: 0;
+  }
+  
+  .sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar nav ul li {
+    padding: 10px 20px;
+  }
+  
+  .sidebar nav ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+
+
+/* Asegúrate de agregar o modificar estos estilos en styles.css */
+/* Estilos para el header y barra fija */
+.header {
+    display: flex;
+    align-items: center;  /* Centrar ícono y título verticalmente */
+    justify-content: flex-start;  /* Ícono y título a la izquierda */
+    padding: 10px;
+    background-color: #f5f5f5;  /* Color de fondo */
+    position: fixed;  /* Hacer que la barra sea fija */
+    top: 0;
+    left: 0;
+    width: 100%;  /* Que ocupe todo el ancho */
+    z-index: 1000;  /* Para que se quede encima de otros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Añadir una sombra sutil */
+  }
+  
+  .hamburger-menu {
+    font-size: 24px;  /* Tamaño del ícono */
+    cursor: pointer;
+    margin-right: 15px;  /* Espacio entre ícono y título */
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    flex-grow: 1;  /* Asegurar que el título ocupe todo el espacio disponible */
+    text-align: center;  /* Centrar el título horizontalmente */
+  }
+  
+  .comidas-container {
+    padding: 20px;
+  }
+  
+  .comidas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .comida-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .comida-card h3 {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .comida-card p {
+    margin: 5px 0;
+  }
+  
+  .comida-card .comida-tipo {
+    font-size: 14px;
+    color: white;
+    background-color: pink;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+  }
+  
+  .comida-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .add-button, .edit-button {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .add-button {
+    color: red;
+  }
+  
+  .edit-button {
+    color: gray;
+  }
+  
+/* Estilos para el contenedor y la cuadrícula de comidas */
+.comidas-container {
+    padding: 20px;
+  }
+  
+  .comidas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .comida-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .comida-card h3 {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .comida-card p {
+    margin: 5px 0;
+  }
+  
+  .comida-card .comida-tipo {
+    font-size: 14px;
+    color: white;
+    background-color: pink;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+  }
+  
+  .comida-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .add-button, .edit-button {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .add-button {
+    color: red;
+  }
+  
+  .edit-button {
+    color: gray;
+  }
+  
+
+  
+
+  .filtro-tipo {
+    display: flex;
+    overflow-x: auto; /* Habilita el desplazamiento horizontal si es necesario */
+    white-space: nowrap;
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  .filtro-button {
+    background-color: #f0f0f0; /* Color de fondo de los botones */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .filtro-button.active {
+    background-color: #d1d1d1; /* Cambia de color cuando está activo */
+  }
+  
+  .filtro-button:hover {
+    background-color: #e0e0e0; /* Cambia de color al pasar el ratón */
+  }
+  
+  /* Para que el carrusel no muestre scrollbars feos */
+  .filtro-tipo::-webkit-scrollbar {
+    display: none;
+  }
+  
+  
+  .recommendations {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .pill {
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pill:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .add-icon {
+    margin-left: 8px;
+    font-size: 18px;
+    color: green;
+  }
+  
