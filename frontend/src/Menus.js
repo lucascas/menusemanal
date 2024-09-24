@@ -5,7 +5,7 @@ function Menus() {
   const [savedMenus, setSavedMenus] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/menus')
+    fetch('/api/menus')
       .then(res => res.json())
       .then(data => setSavedMenus(data))
       .catch(error => console.error('Error fetching menus:', error));

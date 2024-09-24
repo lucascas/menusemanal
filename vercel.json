@@ -1,9 +1,8 @@
 {
-    "rewrites": [
-      {
-        "source": "/api/(.*)",
-        "destination": "/api/$1"
-      }
-    ]
-  }
-  
+  "rewrites": [
+    {
+      "source": "/api/(.*)",   // Captura todas las rutas /api/*
+      "destination": "/api/$1"  // Redirige a las funciones de API correspondientes en el backend
+    }
+  ]
+}
