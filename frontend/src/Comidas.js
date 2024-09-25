@@ -5,7 +5,7 @@ function Comidas() {
   const [nombrePlato, setNombrePlato] = useState('');
   const [ingredientes, setIngredientes] = useState('');
   const [tipoComida, setTipoComida] = useState('Carne');
-  const [momentoComida, setMomentoComida] = useState('Almuerzo');  // Nuevo campo para Almuerzo o Cena
+  const [momentoComida, setMomentoComida] = useState('Almuerzo');  // Campo para Almuerzo o Cena
   const [comidas, setComidas] = useState([]);
   const [filtroTipo, setFiltroTipo] = useState('');
 
@@ -19,15 +19,15 @@ function Comidas() {
     setIsModalOpen(false);
   };
 
+  // Definición del API_URL desde variables de entorno
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
-  console.log('API_URL:', API_URL);
   // Función para manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/comidas`, {
+      const response = await fetch(`${API_URL}/comidas`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,14 +58,12 @@ function Comidas() {
 
   // Función para obtener las comidas al cargar la página
   useEffect(() => {
-    let isMounted = true; // Definir isMounted al principio
-    
-    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
-    console.log('API_URL:', API_URL);
-    
     const fetchComidas = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/comidas`);
+        const response = await fetch(`${API_URL}/comidas`);
+        if (!response.ok) {
+          throw new Error('Error en la respuesta del servidor');
+        }
         const data = await response.json();
         setComidas(data);
       } catch (error) {
@@ -74,11 +72,7 @@ function Comidas() {
     };
 
     fetchComidas();
-
-    return () => {
-      isMounted = false; // Limpiar cuando el componente se desmonte
-    };
-  }, []);
+  }, [API_URL]);
 
   const comidasFiltradas = filtroTipo
     ? comidas.filter((comida) => comida.tipo === filtroTipo)
@@ -130,7 +124,7 @@ function Comidas() {
                   <option value="Pastas">Pastas</option>
                 </select>
               </div>
-              {/* Nuevo campo para elegir entre Almuerzo o Cena */}
+              {/* Campo para elegir entre Almuerzo o Cena */}
               <div>
                 <label>¿Cuándo se sirve?:</label>
                 <select

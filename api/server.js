@@ -1,4 +1,3 @@
-//require('dotenv').config(); // Asegúrate de que esté en la parte superior para cargar las variables de entorno
 const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
@@ -8,27 +7,26 @@ const qrcode = require('qrcode-terminal'); // Importar QR para autenticación
 
 const app = express();
 
-
 // Configurar CORS para aceptar todas las solicitudes
 app.use(cors({
     origin: '*',  // Permitir todos los orígenes
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
-  }));
+}));
 
 app.use(express.json());
 app.use('/api', menuRoutes); // Ruta para las APIs
 
-// Conexión a MongoDB Atlas usando la URI desde el archivo .env
+// Conexión a MongoDB Atlas usando la URI
 mongoose.connect('mongodb+srv://lucascastillo:Cordoba6267@cluster0.2naw1.mongodb.net/menudb?retryWrites=true&w=majority&appName=Cluster0', {
-   useNewUrlParser: true,
-   useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 })
 .then(() => console.log('Conexión a MongoDB exitosa'))
 .catch((error) => console.error('Error conectando a MongoDB:', error));
 
 // Definir el puerto directamente
-const PORT = 5000; // Puedes cambiar este puerto al que prefieras
+const PORT = process.env.PORT || 5000; // Ahora el puerto se define correctamente
 
 // Inicializar cliente de WhatsApp con autenticación local (esto guarda la sesión)
 const client = new Client({
@@ -119,7 +117,9 @@ app.post('/api/menus', async (req, res) => {
 });
 
 // Configuración de rutas
-app.use('./api', menuRoutes);
+app.use('/api', menuRoutes);
 
-const port = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Configurar el puerto y escuchar el servidor
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
+});
