@@ -24,7 +24,7 @@ function Comidas() {
     e.preventDefault();
 
     try {
-      const response = await fetch('/api/comidas', {
+      const response = await fetch('/Comida', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,15 +55,12 @@ function Comidas() {
 
   // Función para obtener las comidas al cargar la página
   useEffect(() => {
-    let isMounted = true;
 
     const fetchComidas = async () => {
       try {
-        const response = await fetch('/api/comidas');
+        const response = await fetch('https://menusemanal.vercel.app/api/comidas');
         const data = await response.json();
-        if (isMounted) {
-          setComidas(data);
-        }
+        setComidas(data);
       } catch (error) {
         console.error('Error al obtener las comidas:', error);
       }

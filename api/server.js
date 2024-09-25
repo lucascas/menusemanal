@@ -9,6 +9,7 @@ const qrcode = require('qrcode-terminal'); // Importar QR para autenticación
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/api', menuRoutes); // Ruta para las APIs
 
 // Conexión a MongoDB Atlas usando la URI desde el archivo .env
 mongoose.connect('mongodb+srv://lucascastillo:Cordoba6267@cluster0.2naw1.mongodb.net/menudb?retryWrites=true&w=majority&appName=Cluster0', {
@@ -110,6 +111,4 @@ app.post('/api/menus', async (req, res) => {
 app.use('/api', menuRoutes);
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
-   console.log(`Servidor corriendo en el puerto ${port}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

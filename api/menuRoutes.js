@@ -1,10 +1,10 @@
 const express = require('express');
-const Menu = require('../Menu');
+const Menu = require('./Menu');
 const router = express.Router();
-const Comida = require('../Comida');  // Modelo Comida (si usas Mongoose o similar)
+const Comida = require('./Comida');  // Modelo Comida (si usas Mongoose o similar)
 
 // Obtener todos los menús
-router.get('/menus', async (req, res) => {
+router.get('/menu', async (req, res) => {
   try {
     const menus = await Menu.find();  // Obtener todos los menús guardados
     res.json(menus);
@@ -14,7 +14,7 @@ router.get('/menus', async (req, res) => {
 });
 
 // Guardar un nuevo menú con almuerzo y cena por día
-router.post('/menus', async (req, res) => {
+router.post('/menu', async (req, res) => {
   const { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday } = req.body;
 
   if (!Monday || !Tuesday || !Wednesday || !Thursday || !Friday || !Saturday || !Sunday) {
