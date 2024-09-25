@@ -19,12 +19,14 @@ function Comidas() {
     setIsModalOpen(false);
   };
 
+  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+  console.log('API_URL:', API_URL);
   // Función para manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('/Comida', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/comidas`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,10 +57,13 @@ function Comidas() {
 
   // Función para obtener las comidas al cargar la página
   useEffect(() => {
-
+    let isMounted = true; // Definir isMounted al principio
+    
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+    console.log('API_URL:', API_URL);
     const fetchComidas = async () => {
       try {
-        const response = await fetch('https://menusemanal.vercel.app/api/comidas');
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/comidas`);
         const data = await response.json();
         setComidas(data);
       } catch (error) {
@@ -69,7 +74,7 @@ function Comidas() {
     fetchComidas();
 
     return () => {
-      isMounted = false;
+      isMounted = false; // Limpiar cuando el componente se desmonte
     };
   }, []);
 

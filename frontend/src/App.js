@@ -19,9 +19,12 @@ function App() {
   const [comidas, setComidas] = useState([]);
   const [savedMenus, setSavedMenus] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const API_URL = process.env.NODE_ENV === 'production'
+  ? process.env.REACT_APP_API_URL
+  : 'http://localhost:5000/api';
 
   useEffect(() => {
-    fetch('/api/comidas')
+    fetch('http://localhost:5000/api/comidas')
       .then((res) => res.json())
       .then((data) => setComidas(data)); // Cargar todas las comidas
   }, []);

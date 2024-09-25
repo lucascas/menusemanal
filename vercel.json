@@ -13,12 +13,21 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",      // Redirigir todas las rutas /api/ al backend
+      "src": "/api/(.*)",      
       "dest": "/api/server.js"
     },
     {
-      "src": "/(.*)",          // Redirigir todo lo demás al frontend
+      "src": "/(.*)",         
       "dest": "/frontend/$1"
+    }
+  ],
+  "env": {
+    "REACT_APP_API_URL": "https://menusemanal.vercel.app/api"
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     }
   ]
 }
