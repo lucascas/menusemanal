@@ -20,6 +20,7 @@ function Comidas() {
   };
 
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
   console.log('API_URL:', API_URL);
   // Función para manejar el envío del formulario
   const handleSubmit = async (e) => {
@@ -61,6 +62,7 @@ function Comidas() {
     
     const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
     console.log('API_URL:', API_URL);
+    
     const fetchComidas = async () => {
       try {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/comidas`);

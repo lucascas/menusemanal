@@ -7,7 +7,15 @@ const { Client, LocalAuth } = require('whatsapp-web.js'); // Importar whatsapp-w
 const qrcode = require('qrcode-terminal'); // Importar QR para autenticación
 
 const app = express();
-app.use(cors());
+
+
+// Configurar CORS para aceptar todas las solicitudes
+app.use(cors({
+    origin: '*',  // Permitir todos los orígenes
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
+
 app.use(express.json());
 app.use('/api', menuRoutes); // Ruta para las APIs
 
