@@ -1,8 +1,8 @@
-require('dotenv').config(); // Asegúrate de que esté en la parte superior para cargar las variables de entorno
+//require('dotenv').config(); // Asegúrate de que esté en la parte superior para cargar las variables de entorno
 const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
-const menuRoutes = require('./menuRoutes'); // Ruta de los menús
+const menuRoutes = require('./routes/menuRoutes'); // Ruta de los menús
 const { Client, LocalAuth } = require('whatsapp-web.js'); // Importar whatsapp-web.js
 const qrcode = require('qrcode-terminal'); // Importar QR para autenticación
 
@@ -18,6 +18,9 @@ mongoose.connect('mongodb+srv://lucascastillo:Cordoba6267@cluster0.2naw1.mongodb
 })
 .then(() => console.log('Conexión a MongoDB exitosa'))
 .catch((error) => console.error('Error conectando a MongoDB:', error));
+
+// Definir el puerto directamente
+const PORT = 5000; // Puedes cambiar este puerto al que prefieras
 
 // Inicializar cliente de WhatsApp con autenticación local (esto guarda la sesión)
 const client = new Client({
@@ -108,7 +111,7 @@ app.post('/api/menus', async (req, res) => {
 });
 
 // Configuración de rutas
-app.use('/api', menuRoutes);
+app.use('./api', menuRoutes);
 
 const port = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
