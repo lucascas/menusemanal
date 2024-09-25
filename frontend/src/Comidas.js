@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+export const dynamic = 'force-dynamic';
+export const revalidate = 0; 
 function Comidas() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [nombrePlato, setNombrePlato] = useState('');
