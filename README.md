@@ -1,4 +1,4 @@
-Menu Semanal - Backend y Frontend
+Menu Semanal - Backend y Frontenda
 Este proyecto consiste en una aplicación que permite crear, almacenar y consultar menús semanales. El frontend está desarrollado en React, mientras que el backend está desarrollado con Node.js, Express y MongoDB utilizando Mongoose para la interacción con la base de datos.
 
 Características
