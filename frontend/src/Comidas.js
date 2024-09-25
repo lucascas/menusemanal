@@ -21,8 +21,10 @@ function Comidas() {
   };
 
   // Definición del API_URL desde variables de entorno
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
-
+  //const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+  const API_URL = process.env.NODE_ENV === 'production'
+  ? process.env.REACT_APP_API_URL
+  : 'http://localhost:5000/api';
   // Función para manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
