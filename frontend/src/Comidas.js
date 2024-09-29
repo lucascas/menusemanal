@@ -28,7 +28,7 @@ function Comidas() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${API_URL}/api/comidas`, {
+      const response = await fetch('http://localhost:5000/api/comidas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ function Comidas() {
 
     const fetchComidas = async () => {
       try {
-        const response = await fetch(`${API_URL}/api/comidas`);
+        const response = await fetch('http://localhost:5000/api/comidas');
         if (!response.ok) {
           throw new Error(`Error en la respuesta del servidor: ${response.statusText}`);
         }
