@@ -24,7 +24,7 @@ function App() {
   : 'http://localhost:5000/api';
 
   useEffect(() => {
-    fetch(`${API_URL}/api/comidas`)
+    fetch('http://localhost:5000/api/comidas')
       .then((res) => res.json())
       .then((data) => setComidas(data)); // Cargar todas las comidas
   }, []);
