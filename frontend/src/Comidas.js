@@ -59,16 +59,19 @@ function Comidas() {
 
   // Función para obtener las comidas al cargar la página
   useEffect(() => {
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
     const fetchComidas = async () => {
       try {
         const response = await fetch(`${API_URL}/comidas`);
         if (!response.ok) {
-          throw new Error('Error en la respuesta del servidor');
+          throw new Error(`Error en la respuesta del servidor: ${response.statusText}`);
         }
+    
         const data = await response.json();
         setComidas(data);
       } catch (error) {
-        console.error('Error al obtener las comidas:', error);
+        console.error('Error al obtener las comidas:', error.message);
       }
     };
 
