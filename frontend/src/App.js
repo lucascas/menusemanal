@@ -3,6 +3,7 @@ import './styles.css';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Menus from './Menus';  // Importar el nuevo componente
 import Comidas from './Comidas';  // Importa el archivo correctamente
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 function App() {
   const [menu, setMenu] = useState({
@@ -23,8 +24,9 @@ function App() {
   ? process.env.REACT_APP_API_URL
   : 'http://localhost:5000/api';
 
+
   useEffect(() => {
-    fetch('http://localhost:5000/api/comidas')
+    fetch(`${API_URL}/comidas`)
       .then((res) => res.json())
       .then((data) => setComidas(data)); // Cargar todas las comidas
   }, []);

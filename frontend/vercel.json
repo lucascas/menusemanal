@@ -1,0 +1,4 @@
+"env": {
+  "MONGODB_URI": "mongodb+srv://lucascastillo:Cordoba6267@cluster0.2naw1.mongodb.net/menudb?retryWrites=true&w=majority&appName=Cluster0",
+  "REACT_APP_API_URL": "https://menusemanal-backend.vercel.app/api"
+}
